@@ -1,0 +1,8 @@
+{
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json",
+  "version": 2,
+  "projects": {
+    "pizzaperfect": "apps/pizzaperfect",
+    "pizzaperfect-e2e": "apps/pizzaperfect-e2e"
+  }
+}
