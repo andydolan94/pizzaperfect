@@ -23,7 +23,7 @@ public class BaseController {
 	 * @return a response with the list of bases
 	 */
 	@GetMapping("/bases")
-	public ResponseEntity<List<Base>> getAllBase() {
+	public ResponseEntity<List<Base>> getAll() {
 		return new ResponseEntity<>(baseService.findAll(), HttpStatus.OK);
 	}
 

@@ -23,7 +23,7 @@ public class ToppingController {
 	 * @return a response with the list of toppings
 	 */
 	@GetMapping("/toppings")
-	public ResponseEntity<List<Topping>> getAllTopping() {
+	public ResponseEntity<List<Topping>> getAll() {
 		return new ResponseEntity<>(toppingService.findAll(), HttpStatus.OK);
 	}
 

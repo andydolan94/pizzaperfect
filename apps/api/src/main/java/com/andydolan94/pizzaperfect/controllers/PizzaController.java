@@ -23,7 +23,7 @@ public class PizzaController {
 	 * @return a response with the list of pizzas
 	 */
 	@GetMapping("/pizzas")
-	public ResponseEntity<List<Pizza>> getAllPizza() {
+	public ResponseEntity<List<Pizza>> getAll() {
 		return new ResponseEntity<>(pizzaService.findAll(), HttpStatus.OK);
 	}
 
