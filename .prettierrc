@@ -1,4 +1,15 @@
 {
+	"overrides": [
+		{
+			"files": [
+				"*.java"
+			],
+			"options": {
+      			"tabWidth": 4,
+      			"useTabs": true
+			}
+		}
+	],
 	"singleQuote": true,
 	"useTabs": true,
 	"tabWidth": 4
