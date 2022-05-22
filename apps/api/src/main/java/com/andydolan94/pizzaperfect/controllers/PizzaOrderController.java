@@ -16,18 +16,18 @@ import org.springframework.web.bind.annotation.*;
 public class PizzaOrderController {
 
 	@Autowired
-	private PizzaOrderService PizzaOrderService;
+	private PizzaOrderService pizzaOrderService;
 
 	@GetMapping("/pizza-orders")
 	public ResponseEntity<List<PizzaOrder>> getAll() {
-		return new ResponseEntity<>(PizzaOrderService.findAll(), HttpStatus.OK);
+		return new ResponseEntity<>(pizzaOrderService.findAll(), HttpStatus.OK);
 	}
 
 	@GetMapping("/pizza-orders/{id}")
 	public ResponseEntity<Optional<PizzaOrder>> getById(@PathVariable Long id) {
 		try {
 			return new ResponseEntity<>(
-				PizzaOrderService.findById(id),
+				pizzaOrderService.findById(id),
 				HttpStatus.OK
 			);
 		} catch (ResourceNotFoundException ex) {
@@ -41,7 +41,7 @@ public class PizzaOrderController {
 	) {
 		try {
 			return new ResponseEntity<>(
-				PizzaOrderService.save(pizzaOrder),
+				pizzaOrderService.save(pizzaOrder),
 				HttpStatus.CREATED
 			);
 		} catch (ResourceAlreadyExistsException ex) {
@@ -59,7 +59,7 @@ public class PizzaOrderController {
 		try {
 			pizzaOrder.setId(id); // Overwrite the id if one is supplied in the body
 			return new ResponseEntity<>(
-				PizzaOrderService.update(pizzaOrder),
+				pizzaOrderService.update(pizzaOrder),
 				HttpStatus.OK
 			);
 		} catch (ResourceNotFoundException ex) {
