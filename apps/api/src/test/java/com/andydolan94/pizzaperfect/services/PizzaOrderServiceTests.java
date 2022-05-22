@@ -23,6 +23,10 @@ public class PizzaOrderServiceTests {
 		pizzaOrderRepository.deleteAll();
 	}
 
+	/**
+	 * Arrange an order and save it to the database, retrieve all orders
+	 * and check if the id, customer name, and delivery address matches.
+	 */
 	@Test
 	void shouldGetAllPizzaOrders() {
 		// Arrange
@@ -50,6 +54,12 @@ public class PizzaOrderServiceTests {
 		);
 	}
 
+	/**
+	 * Arrange an order, save it to the database, then check if there is
+	 * exactly one order in the database
+	 * @throws BadResourceException if the order is malformed
+	 * @throws ResourceAlreadyExistsException if a pizza exists already with the supplied id
+	 */
 	@Test
 	void shouldSaveAPizzaOrder()
 		throws BadResourceException, ResourceAlreadyExistsException {
@@ -69,6 +79,15 @@ public class PizzaOrderServiceTests {
 		assertEquals(1.0, pizzaOrderRepository.count());
 	}
 
+	/**
+	 * Arrange the first order, save it to the database and get its id.
+	 * Arrange a second order to replace the existing order
+	 * Replace the existing order
+	 * Retrieve the order via the saved id and check if the order 
+	 * matches the second order.
+	 * @throws BadResourceException
+	 * @throws ResourceNotFoundException
+	 */
 	@Test
 	void shouldUpdateAPizzaOrder()
 		throws BadResourceException, ResourceNotFoundException {
