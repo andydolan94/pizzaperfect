@@ -36,6 +36,11 @@ public class PizzaOrderControllerTests {
 	@MockBean
 	private PizzaOrderService pizzaOrderService;
 
+	/**
+	 * Assembles a list of 2 orders, returns them through a mock request, and
+	 * checks if 2 orders have been added.
+	 * @throws Exception if the order list cannot be found
+	 */
 	@Test
 	void shouldGetAllThePizzaOrders() throws Exception {
 		List<PizzaOrder> pizzaOrderList = new ArrayList<>();
@@ -66,6 +71,11 @@ public class PizzaOrderControllerTests {
 			.andDo(print());
 	}
 
+	/**
+	 * Assembles an order, returns it through a mock request, then checks if
+	 * the response is ok (200), and if the id and note matches.
+	 * @throws Exception if the order cannot be retrieved
+	 */
 	@Test
 	void shouldGetOnePizzaOrder() throws Exception {
 		long id = 1L;
@@ -93,6 +103,12 @@ public class PizzaOrderControllerTests {
 			.andDo(print());
 	}
 
+	/**
+	 * Assembles an order, creates it through a mock request, checks if the
+	 * response shows it has been created (201), and if the id, the customer
+	 * name and the delivery address matches.
+	 * @throws Exception if the order cannot be created
+	 */
 	@Test
 	void shouldSuccessfullyCreateAPizzaOrder() throws Exception {
 		long id = 1L;
@@ -124,6 +140,12 @@ public class PizzaOrderControllerTests {
 			);
 	}
 
+	/**
+	 * Assemble 2 orders, return the first one through a mock request, update
+	 * the second using another mock request, then check if the id, the customer
+	 * name, and the delivery address all match.
+	 * @throws Exception if the pizza cannot be updated
+	 */
 	@Test
 	void shouldSuccessfullyUpdateAPizzaOrder() throws Exception {
 		long id = 1L;
