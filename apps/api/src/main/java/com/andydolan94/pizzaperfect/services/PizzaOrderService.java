@@ -50,7 +50,7 @@ public class PizzaOrderService {
 		throws ResourceNotFoundException {
 		if (!existsById(id)) {
 			throw new ResourceNotFoundException(
-				"Cannot find Contact with id: %d".formatted(id)
+				"Cannot find order with id: %d".formatted(id)
 			);
 		} else {
 			return pizzaOrderRepository.findById(id);
@@ -73,7 +73,7 @@ public class PizzaOrderService {
 		) {
 			if (existsById(pizzaOrder.getId())) {
 				throw new ResourceAlreadyExistsException(
-					"Contact with id: %d already exists".formatted(
+					"Order with id: %d already exists".formatted(
 							pizzaOrder.getId()
 						)
 				);
@@ -81,9 +81,9 @@ public class PizzaOrderService {
 			return pizzaOrderRepository.save(pizzaOrder);
 		} else {
 			BadResourceException ex = new BadResourceException(
-				"Failed to save pizza order"
+				"Failed to save order"
 			);
-			ex.addErrorMessage("Pizza order is null or empty");
+			ex.addErrorMessage("Order is null or empty");
 			throw ex;
 		}
 	}
@@ -103,7 +103,7 @@ public class PizzaOrderService {
 		) {
 			if (!existsById(pizzaOrder.getId())) {
 				throw new ResourceNotFoundException(
-					"Cannot find Contact with id: %d".formatted(
+					"Cannot find order with id: %d".formatted(
 							pizzaOrder.getId()
 						)
 				);
@@ -111,9 +111,9 @@ public class PizzaOrderService {
 			return pizzaOrderRepository.save(pizzaOrder);
 		} else {
 			BadResourceException ex = new BadResourceException(
-				"Failed to save contact"
+				"Failed to save order"
 			);
-			ex.addErrorMessage("Contact is null or empty");
+			ex.addErrorMessage("Order is null or empty");
 			throw ex;
 		}
 	}
