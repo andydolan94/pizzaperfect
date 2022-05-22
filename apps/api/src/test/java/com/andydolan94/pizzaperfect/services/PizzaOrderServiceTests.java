@@ -55,6 +55,39 @@ public class PizzaOrderServiceTests {
 	}
 
 	/**
+	 * Arrange an order and save it to the database, retrieve that order
+	 * and check if the id, customer name, and delivery address matches.
+	 * @throws ResourceNotFoundException if the order cannot be found
+	 */
+	@Test
+	void shouldGetOnePizzaOrder() throws ResourceNotFoundException {
+
+		// Arrange
+		PizzaOrder pizzaOrderSample = new PizzaOrder(
+			"John Doe",
+			"1 example lane, testown, presetville 1234"
+		);
+		long id = pizzaOrderRepository.save(pizzaOrderSample).getId();
+		PizzaOrderService pizzaOrderService = new PizzaOrderService(
+			pizzaOrderRepository
+		);
+
+		// Act
+		PizzaOrder firstResult = pizzaOrderService.findById(id).get();
+
+		// Assert
+		assertEquals(pizzaOrderSample.getId(), firstResult.getId());
+		assertEquals(
+			pizzaOrderSample.getCustomerName(),
+			firstResult.getCustomerName()
+		);
+		assertEquals(
+			pizzaOrderSample.getDeliveryAddress(),
+			firstResult.getDeliveryAddress()
+		);
+	}
+
+	/**
 	 * Arrange an order, save it to the database, then check if there is
 	 * exactly one order in the database
 	 * @throws BadResourceException if the order is malformed
