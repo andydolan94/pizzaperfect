@@ -58,7 +58,7 @@ public class PizzaOrderServiceTests {
 	 * Arrange an order, save it to the database, then check if there is
 	 * exactly one order in the database
 	 * @throws BadResourceException if the order is malformed
-	 * @throws ResourceAlreadyExistsException if a pizza exists already with the supplied id
+	 * @throws ResourceAlreadyExistsException if a order exists already with the supplied id
 	 */
 	@Test
 	void shouldSaveAPizzaOrder()
