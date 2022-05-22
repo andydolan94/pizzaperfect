@@ -18,11 +18,20 @@ public class PizzaOrderController {
 	@Autowired
 	private PizzaOrderService pizzaOrderService;
 
+	/**
+	 * Gets a list of orders
+	 * @return a response with the list of orders
+	 */
 	@GetMapping("/pizza-orders")
 	public ResponseEntity<List<PizzaOrder>> getAll() {
 		return new ResponseEntity<>(pizzaOrderService.findAll(), HttpStatus.OK);
 	}
 
+	/**
+	 * Gets a single order
+	 * @param id the order id
+	 * @return a response with the order
+	 */
 	@GetMapping("/pizza-orders/{id}")
 	public ResponseEntity<Optional<PizzaOrder>> getById(@PathVariable Long id) {
 		try {
@@ -35,6 +44,11 @@ public class PizzaOrderController {
 		}
 	}
 
+	/**
+	 * Creates an order
+	 * @param pizzaOrder the order to be created
+	 * @return a response with the order
+	 */
 	@PostMapping("/pizza-orders")
 	public ResponseEntity<PizzaOrder> create(
 		@RequestBody PizzaOrder pizzaOrder
@@ -51,6 +65,12 @@ public class PizzaOrderController {
 		}
 	}
 
+	/**
+	 * Updates an order
+	 * @param id the id of the existing order
+	 * @param pizzaOrder the order to replace the existing order
+	 * @return a response with the updated order
+	 */
 	@PutMapping("/pizza-orders/{id}")
 	public ResponseEntity<PizzaOrder> update(
 		@PathVariable Long id,
