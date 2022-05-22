@@ -50,6 +50,34 @@ public class PizzaServiceTests {
 	}
 
 	/**
+	 * Arrange a pizza and save it to the database, retrieve that pizza
+	 * and check if the id and note matches.
+	 * @throws ResourceNotFoundException if the pizza cannot be found
+	 */
+	@Test
+	void shouldGetOnePizza() throws ResourceNotFoundException {
+
+		// Arrange
+		Pizza pizzaSample = new Pizza(
+			"Please add extra olives too"
+		);
+		long id = pizzaRepository.save(pizzaSample).getId();
+		PizzaService pizzaService = new PizzaService(
+			pizzaRepository
+		);
+
+		// Act
+		Pizza firstResult = pizzaService.findById(id).get();
+
+		// Assert
+		assertEquals(pizzaSample.getId(), firstResult.getId());
+		assertEquals(
+			pizzaSample.getNote(),
+			firstResult.getNote()
+		);
+	}
+
+	/**
 	 * Arrange a pizza, save it to the database, then check if there is
 	 * exactly one pizza in the database
 	 * @throws BadResourceException if the pizza is malformed
