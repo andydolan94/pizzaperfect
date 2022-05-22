@@ -27,7 +27,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest
+@WebMvcTest(PizzaOrderController.class)
 public class PizzaOrderControllerTests {
 
 	@Autowired
