@@ -39,6 +39,7 @@ public class PizzaOrderServiceTests {
 		PizzaOrder firstResult = pizzaOrderService.findAll().get(0);
 
 		// Assert
+		assertEquals(pizzaOrderSample.getId(), firstResult.getId());
 		assertEquals(
 			pizzaOrderSample.getCustomerName(),
 			firstResult.getCustomerName()
@@ -47,7 +48,6 @@ public class PizzaOrderServiceTests {
 			pizzaOrderSample.getDeliveryAddress(),
 			firstResult.getDeliveryAddress()
 		);
-		assertEquals(pizzaOrderSample.getId(), firstResult.getId());
 	}
 
 	@Test
@@ -93,6 +93,7 @@ public class PizzaOrderServiceTests {
 		PizzaOrder result = pizzaOrderService.update(newPizzaOrderSample);
 
 		// Assert
+		assertEquals(newPizzaOrderSample.getId(), result.getId());
 		assertEquals(
 			newPizzaOrderSample.getCustomerName(),
 			result.getCustomerName()
@@ -101,6 +102,5 @@ public class PizzaOrderServiceTests {
 			newPizzaOrderSample.getDeliveryAddress(),
 			result.getDeliveryAddress()
 		);
-		assertEquals(newPizzaOrderSample.getId(), result.getId());
 	}
 }
