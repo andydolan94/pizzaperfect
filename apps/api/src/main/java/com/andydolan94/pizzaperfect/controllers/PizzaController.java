@@ -1,10 +1,10 @@
 package com.andydolan94.pizzaperfect.controllers;
 
-import com.andydolan94.pizzaperfect.entities.PizzaOrder;
+import com.andydolan94.pizzaperfect.entities.Pizza;
 import com.andydolan94.pizzaperfect.exceptions.BadResourceException;
 import com.andydolan94.pizzaperfect.exceptions.ResourceAlreadyExistsException;
 import com.andydolan94.pizzaperfect.exceptions.ResourceNotFoundException;
-import com.andydolan94.pizzaperfect.services.PizzaOrderService;
+import com.andydolan94.pizzaperfect.services.PizzaService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,30 +13,30 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class PizzaOrderController {
-
+public class PizzaController {
+	
 	@Autowired
-	private PizzaOrderService pizzaOrderService;
+	private PizzaService pizzaService;
 
 	/**
-	 * Gets a list of orders
-	 * @return a response with the list of orders
+	 * Gets a list of pizzas
+	 * @return a response with the list of pizzas
 	 */
-	@GetMapping("/pizza-orders")
-	public ResponseEntity<List<PizzaOrder>> getAll() {
-		return new ResponseEntity<>(pizzaOrderService.findAll(), HttpStatus.OK);
+	@GetMapping("/pizzas")
+	public ResponseEntity<List<Pizza>> getAllPizza() {
+		return new ResponseEntity<>(pizzaService.findAll(), HttpStatus.OK);
 	}
 
 	/**
-	 * Gets a single order
-	 * @param id the order id
-	 * @return a response with the order
+	 * Gets a single pizza
+	 * @param id the pizza id
+	 * @return a response with the pizza
 	 */
-	@GetMapping("/pizza-orders/{id}")
-	public ResponseEntity<Optional<PizzaOrder>> getById(@PathVariable Long id) {
+	@GetMapping("/pizzas/{id}")
+	public ResponseEntity<Optional<Pizza>> getById(@PathVariable Long id) {
 		try {
 			return new ResponseEntity<>(
-				pizzaOrderService.findById(id),
+				pizzaService.findById(id),
 				HttpStatus.OK
 			);
 		} catch (ResourceNotFoundException ex) {
@@ -45,17 +45,17 @@ public class PizzaOrderController {
 	}
 
 	/**
-	 * Creates an order
-	 * @param pizzaOrder the order to be created
-	 * @return a response with the order
+	 * Creates a pizza
+	 * @param pizza the pizza to be created
+	 * @return a response with the pizza
 	 */
-	@PostMapping("/pizza-orders")
-	public ResponseEntity<PizzaOrder> create(
-		@RequestBody PizzaOrder pizzaOrder
+	@PostMapping("/pizzas")
+	public ResponseEntity<Pizza> create(
+		@RequestBody Pizza pizza
 	) {
 		try {
 			return new ResponseEntity<>(
-				pizzaOrderService.save(pizzaOrder),
+				pizzaService.save(pizza),
 				HttpStatus.CREATED
 			);
 		} catch (ResourceAlreadyExistsException ex) {
@@ -66,20 +66,20 @@ public class PizzaOrderController {
 	}
 
 	/**
-	 * Updates an order
-	 * @param id the id of the existing order
-	 * @param pizzaOrder the order to replace the existing order
-	 * @return a response with the updated order
+	 * Updates a pizza
+	 * @param id the id of the existing pizza
+	 * @param pizza the pizza to replace the existing pizza
+	 * @return a response with the updated pizza
 	 */
-	@PutMapping("/pizza-orders/{id}")
-	public ResponseEntity<PizzaOrder> update(
+	@PutMapping("/pizzas/{id}")
+	public ResponseEntity<Pizza> update(
 		@PathVariable Long id,
-		@RequestBody PizzaOrder pizzaOrder
+		@RequestBody Pizza pizza
 	) {
 		try {
-			pizzaOrder.setId(id); // Overwrite the id if one is supplied in the body
+			pizza.setId(id); // Overwrite the id if one is supplied in the body
 			return new ResponseEntity<>(
-				pizzaOrderService.update(pizzaOrder),
+				pizzaService.update(pizza),
 				HttpStatus.OK
 			);
 		} catch (ResourceNotFoundException ex) {

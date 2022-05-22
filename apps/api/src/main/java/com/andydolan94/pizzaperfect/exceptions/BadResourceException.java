@@ -7,8 +7,15 @@ public class BadResourceException extends Exception {
 
 	private List<String> errorMessages = new ArrayList<>();
 
+	/**
+	 * Class constructor
+	 */
 	public BadResourceException() {}
 
+	/**
+	 * Class constructor defining the message
+	 * @param msg the message to set
+	 */
 	public BadResourceException(String msg) {
 		super(msg);
 	}
