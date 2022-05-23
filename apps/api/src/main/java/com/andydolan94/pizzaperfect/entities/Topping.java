@@ -2,13 +2,16 @@
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 @Entity
+@SequenceGenerator(name="TOPPING_SEQUENCE", sequenceName="topping_sequence")
 public class Topping {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TOPPING_SEQUENCE")
 	private long id;
 
 	private String name;

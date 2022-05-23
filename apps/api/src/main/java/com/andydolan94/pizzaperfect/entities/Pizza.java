@@ -2,13 +2,16 @@
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 @Entity
+@SequenceGenerator(name="PIZZA_SEQUENCE", sequenceName="pizza_sequence")
 public class Pizza {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PIZZA_SEQUENCE")
 	private long id;
 
 	private String note;

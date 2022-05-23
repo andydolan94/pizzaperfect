@@ -2,13 +2,16 @@
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 @Entity
+@SequenceGenerator(name="SIZE_SEQUENCE", sequenceName="size_sequence")
 public class Size {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SIZE_SEQUENCE")
 	private long id;
 
 	private String name;

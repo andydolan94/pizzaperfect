@@ -2,13 +2,16 @@
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 @Entity
+@SequenceGenerator(name="BASE_SEQUENCE", sequenceName="base_sequence")
 public class Base {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BASE_SEQUENCE")
 	private long id;
 
 	private String name;
