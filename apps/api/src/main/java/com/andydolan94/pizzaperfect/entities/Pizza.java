@@ -23,6 +23,9 @@ public class Pizza {
 	private long id;
 
 	private String note;
+	private String topping;
+	private String base;
+	private String size;
 
 	@ManyToOne
 	@JoinColumn(
@@ -43,10 +46,22 @@ public class Pizza {
 
 	/**
 	 * Class constructor defining the note and the order the pizza belongs to
+	 * @param topping the topping to go on the pizza
+	 * @param base the kind of bread that is added
+	 * @param size the size of the pizza
 	 * @param note the note written by a customer about the pizza
 	 * @param pizzaOrderId the order id the pizza belongs to
 	 */
-	public Pizza(String note, Long pizzaOrderId) {
+	public Pizza(
+		String topping,
+		String base,
+		String size,
+		String note,
+		Long pizzaOrderId
+	) {
+		this.topping = topping;
+		this.base = base;
+		this.size = size;
 		this.note = note;
 		this.pizzaOrderId = pizzaOrderId;
 	}
@@ -54,11 +69,24 @@ public class Pizza {
 	/**
 	 * Class constructor defining the id, the note, and the order the pizza belongs to
 	 * @param id the id of the pizza
+	 * @param topping the topping to go on the pizza
+	 * @param base the kind of bread that is added
+	 * @param size the size of the pizza
 	 * @param note the note written by a customer about the pizza
 	 * @param pizzaOrderId the order id the pizza belongs to
 	 */
-	public Pizza(Long id, String note, Long pizzaOrderId) {
+	public Pizza(
+		Long id, 
+		String topping,
+		String base,
+		String size,
+		String note, 
+		Long pizzaOrderId
+	) {
 		this.id = id;
+		this.topping = topping;
+		this.base = base;
+		this.size = size;
 		this.note = note;
 		this.pizzaOrderId = pizzaOrderId;
 	}
@@ -77,6 +105,54 @@ public class Pizza {
 	 */
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	/**
+	 * Gets the topping
+	 * @return the topping
+	 */
+	public String getTopping() {
+		return topping;
+	}
+
+	/**
+	 * Sets the topping
+	 * @param note the topping to set
+	 */
+	public void setTopping(String topping) {
+		this.topping = topping;
+	}
+
+	/**
+	 * Gets the base
+	 * @return the base
+	 */
+	public String getBase() {
+		return base;
+	}
+
+	/**
+	 * Sets the base
+	 * @param note the base to set
+	 */
+	public void setBase(String base) {
+		this.base = base;
+	}
+
+	/**
+	 * Gets the size
+	 * @return the size
+	 */
+	public String getSize() {
+		return size;
+	}
+
+	/**
+	 * Sets the size
+	 * @param note the size to set
+	 */
+	public void setSize(String size) {
+		this.size = size;
 	}
 
 	/**
