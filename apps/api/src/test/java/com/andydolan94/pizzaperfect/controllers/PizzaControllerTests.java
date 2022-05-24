@@ -10,6 +10,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.andydolan94.pizzaperfect.entities.Pizza;
+import com.andydolan94.pizzaperfect.entities.PizzaOrder;
 import com.andydolan94.pizzaperfect.services.PizzaService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.ArrayList;
@@ -43,9 +44,13 @@ public class PizzaControllerTests {
 	 */
 	@Test
 	void shouldGetAllThePizzas() throws Exception {
+		long pizzaOrderId = new PizzaOrder(
+			"John Doe",
+			"1 example lane, testown, presetville 1234"
+		).getId();
 		List<Pizza> pizzaList = new ArrayList<>();
-		pizzaList.add(new Pizza(1L, "Please add extra olives"));
-		pizzaList.add(new Pizza(2L, "Please add extra anchovies"));
+		pizzaList.add(new Pizza(1L, "Please add extra olives", pizzaOrderId));
+		pizzaList.add(new Pizza(2L, "Please add extra anchovies", pizzaOrderId));
 
 		when(pizzaService.findAll()).thenReturn(pizzaList);
 
@@ -68,7 +73,11 @@ public class PizzaControllerTests {
 	void shouldGetOnePizza() throws Exception {
 		long id = 1L;
 
-		Pizza pizza = new Pizza(id, "Please add extra olives");
+		long pizzaOrderId = new PizzaOrder(
+			"John Doe",
+			"1 example lane, testown, presetville 1234"
+		).getId();
+		Pizza pizza = new Pizza(id, "Please add extra olives", pizzaOrderId);
 
 		when(pizzaService.findById(id)).thenReturn(Optional.of(pizza));
 
@@ -89,7 +98,11 @@ public class PizzaControllerTests {
 	@Test
 	void shouldSuccessfullyCreateAPizza() throws Exception {
 		long id = 1L;
-		Pizza pizza = new Pizza(id, "Please add extra olives");
+		long pizzaOrderId = new PizzaOrder(
+			"John Doe",
+			"1 example lane, testown, presetville 1234"
+		).getId();
+		Pizza pizza = new Pizza(id, "Please add extra olives", pizzaOrderId);
 
 		when(pizzaService.save(any(Pizza.class))).thenReturn(pizza);
 
@@ -117,8 +130,12 @@ public class PizzaControllerTests {
 	@Test
 	void shouldSuccessfullyUpdateAPizza() throws Exception {
 		long id = 1L;
-		Pizza pizza = new Pizza(id, "Please add extra olives");
-		Pizza newPizza = new Pizza(id, "Please add extra anchovies");
+		long pizzaOrderId = new PizzaOrder(
+			"John Doe",
+			"1 example lane, testown, presetville 1234"
+		).getId();
+		Pizza pizza = new Pizza(id, "Please add extra olives", pizzaOrderId);
+		Pizza newPizza = new Pizza(id, "Please add extra anchovies", pizzaOrderId);
 
 		when(pizzaService.findById(id)).thenReturn(Optional.of(pizza));
 		when(pizzaService.update(any(Pizza.class))).thenReturn(newPizza);
@@ -134,8 +151,6 @@ public class PizzaControllerTests {
 
 		result
 			.andExpect(status().isOk())
-			.andExpect(
-				jsonPath("$.note").value("Please add extra anchovies")
-			);
+			.andExpect(jsonPath("$.note").value("Please add extra anchovies"));
 	}
 }

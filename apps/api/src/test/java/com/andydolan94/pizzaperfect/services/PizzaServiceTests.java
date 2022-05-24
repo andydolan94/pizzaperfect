@@ -3,11 +3,14 @@ package com.andydolan94.pizzaperfect.services;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.andydolan94.pizzaperfect.entities.Pizza;
+import com.andydolan94.pizzaperfect.entities.PizzaOrder;
 import com.andydolan94.pizzaperfect.exceptions.BadResourceException;
 import com.andydolan94.pizzaperfect.exceptions.ResourceAlreadyExistsException;
 import com.andydolan94.pizzaperfect.exceptions.ResourceNotFoundException;
+import com.andydolan94.pizzaperfect.repositories.PizzaOrderRepository;
 import com.andydolan94.pizzaperfect.repositories.PizzaRepository;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,9 +21,24 @@ public class PizzaServiceTests {
 	@Autowired
 	private PizzaRepository pizzaRepository;
 
+	@Autowired 
+	private PizzaOrderRepository pizzaOrderRepository;
+	private long pizzaOrderId;
+
+	@BeforeEach
+	void setUp() {
+		PizzaOrder pizzaOrder = new PizzaOrder(
+			"John Doe", 
+			"1 example lane, testown, presetville 1234"
+		);
+		// Need to save a mock order for the pizzas to belong to
+		pizzaOrderId = pizzaOrderRepository.save(pizzaOrder).getId();
+	}
+
 	@AfterEach
 	void tearDown() {
 		pizzaRepository.deleteAll();
+		pizzaOrderRepository.deleteAll();
 	}
 
 	/**
@@ -31,7 +49,8 @@ public class PizzaServiceTests {
 	void shouldGetAllPizzas() {
 		// Arrange
 		Pizza pizzaSample = new Pizza(
-			"Please add extra olives"
+			"Please add extra olives",
+			pizzaOrderId
 		);
 		pizzaRepository.save(pizzaSample);
 		PizzaService pizzaService = new PizzaService(
@@ -59,7 +78,8 @@ public class PizzaServiceTests {
 
 		// Arrange
 		Pizza pizzaSample = new Pizza(
-			"Please add extra olives too"
+			"Please add extra olives too",
+			pizzaOrderId
 		);
 		long id = pizzaRepository.save(pizzaSample).getId();
 		PizzaService pizzaService = new PizzaService(
@@ -82,16 +102,18 @@ public class PizzaServiceTests {
 	 * exactly one pizza in the database
 	 * @throws BadResourceException if the pizza is malformed
 	 * @throws ResourceAlreadyExistsException if a pizza exists already with the supplied id
+	 * @throws ResourceNotFoundException if the pizza is being assigned to an order that does not exist
 	 */
 	@Test
 	void shouldSaveAPizza()
-		throws BadResourceException, ResourceAlreadyExistsException {
+		throws BadResourceException, ResourceAlreadyExistsException, ResourceNotFoundException {
 		// Arrange
 		PizzaService pizzaService = new PizzaService(
 			pizzaRepository
 		);
 		Pizza pizzaSample = new Pizza(
-			"Please add extra olives"
+			"Please add extra olives",
+			pizzaOrderId
 		);
 
 		// Act
@@ -115,14 +137,16 @@ public class PizzaServiceTests {
 		throws BadResourceException, ResourceNotFoundException {
 		// Arrange
 		Pizza pizzaSample = new Pizza(
-			"Please add extra olives"
+			"Please add extra olives",
+			pizzaOrderId
 		);
 		Long pizzaSampleId = pizzaRepository
 			.save(pizzaSample)
 			.getId();
 		Pizza newPizzaSample = new Pizza(
 			pizzaSampleId,
-			"Please add extra anchovies"
+			"Please add extra anchovies",
+			pizzaOrderId
 		);
 		PizzaService pizzaService = new PizzaService(
 			pizzaRepository
