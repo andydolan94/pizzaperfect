@@ -167,12 +167,4 @@ public class PizzaOrder {
 	public List<Pizza> getPizzas() {
 		return this.pizzas;
 	}
-
-	/**
-	 * Sets the list of pizzas on an order
-	 * @param pizzas the list of pizzas to set
-	 */
-	public void setPizzas(List<Pizza> pizzas) {
-		this.pizzas = pizzas;
-	}
 }
