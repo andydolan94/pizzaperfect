@@ -1,12 +1,16 @@
 package com.andydolan94.pizzaperfect.entities;
 
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "pizza_order")
 @SequenceGenerator(name="PIZZA_ORDER_SEQUENCE", sequenceName="pizza_order_sequence")
 public class PizzaOrder {
 
@@ -17,13 +21,18 @@ public class PizzaOrder {
 	private String customerName;
 	private String deliveryAddress;
 
+	@OneToMany(
+		mappedBy = "pizzaOrder"
+	)
+	private List<Pizza> pizzas;
+
 	/**
 	 * Class constructor
 	 */
 	public PizzaOrder() {}
 
 	/**
-	 * Class constructor specifying a customer name, and a delivery address 
+	 * Class constructor specifying a customer name, and a delivery address
 	 * for the order
 	 * @param customerName the customer name
 	 * @param deliveryAddress the delivery address
@@ -92,5 +101,21 @@ public class PizzaOrder {
 	 */
 	public void setDeliverAddress(String deliveryAddress) {
 		this.deliveryAddress = deliveryAddress;
+	}
+
+	/**
+	 * Gets the list of pizzas on an order
+	 * @return the list of pizzas
+	 */
+	public List<Pizza> getPizzas() {
+		return this.pizzas;
+	}
+
+	/**
+	 * Sets the list of pizzas on an order
+	 * @param pizzas the list of pizzas to set
+	 */
+	public void setPizzas(List<Pizza> pizzas) {
+		this.pizzas = pizzas;
 	}
 }

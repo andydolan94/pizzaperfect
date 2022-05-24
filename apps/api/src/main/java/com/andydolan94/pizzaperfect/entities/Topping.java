@@ -5,8 +5,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "topping")
 @SequenceGenerator(name="TOPPING_SEQUENCE", sequenceName="topping_sequence")
 public class Topping {
 
