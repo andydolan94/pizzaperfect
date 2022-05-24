@@ -47,10 +47,29 @@ public class PizzaControllerTests {
 		long pizzaOrderId = new PizzaOrder(
 			"John Doe",
 			"1 example lane, testown, presetville 1234"
-		).getId();
+		)
+			.getId();
 		List<Pizza> pizzaList = new ArrayList<>();
-		pizzaList.add(new Pizza(1L, "Please add extra olives", pizzaOrderId));
-		pizzaList.add(new Pizza(2L, "Please add extra anchovies", pizzaOrderId));
+		pizzaList.add(
+			new Pizza(
+				1L,
+				"Hawaiian",
+				"Deep Dish",
+				"Regular",
+				"Please add extra olives",
+				pizzaOrderId
+			)
+		);
+		pizzaList.add(
+			new Pizza(
+				2L,
+				"Pepperoni",
+				"Thin Crust",
+				"Large",
+				"Please add extra anchovies",
+				pizzaOrderId
+			)
+		);
 
 		when(pizzaService.findAll()).thenReturn(pizzaList);
 
@@ -66,7 +85,7 @@ public class PizzaControllerTests {
 
 	/**
 	 * Assembles a pizza, returns it through a mock request, then checks if
-	 * the response is ok (200), and if the id and note matches.
+	 * the response is ok (200), and if the id, topping, base, size, and note matches.
 	 * @throws Exception if the pizza cannot be retrieved
 	 */
 	@Test
@@ -76,8 +95,16 @@ public class PizzaControllerTests {
 		long pizzaOrderId = new PizzaOrder(
 			"John Doe",
 			"1 example lane, testown, presetville 1234"
-		).getId();
-		Pizza pizza = new Pizza(id, "Please add extra olives", pizzaOrderId);
+		)
+			.getId();
+		Pizza pizza = new Pizza(
+			id,
+			"Hawaiian",
+			"Deep Dish",
+			"Regular",
+			"Please add extra olives",
+			pizzaOrderId
+		);
 
 		when(pizzaService.findById(id)).thenReturn(Optional.of(pizza));
 
@@ -85,14 +112,17 @@ public class PizzaControllerTests {
 			.perform(MockMvcRequestBuilders.get("/pizzas/{id}", id))
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("$.id").value(id))
+			.andExpect(jsonPath("$.topping").value(pizza.getTopping()))
+			.andExpect(jsonPath("$.base").value(pizza.getBase()))
+			.andExpect(jsonPath("$.size").value(pizza.getSize()))
 			.andExpect(jsonPath("$.note").value(pizza.getNote()))
 			.andDo(print());
 	}
 
 	/**
 	 * Assembles a pizza, creates it through a mock request, checks if the
-	 * response shows it has been created (201), and if the id and note
-	 * matches.
+	 * response shows it has been created (201), and if the id, topping,
+	 * base, size, and note matches.
 	 * @throws Exception if the pizza cannot be created
 	 */
 	@Test
@@ -101,8 +131,16 @@ public class PizzaControllerTests {
 		long pizzaOrderId = new PizzaOrder(
 			"John Doe",
 			"1 example lane, testown, presetville 1234"
-		).getId();
-		Pizza pizza = new Pizza(id, "Please add extra olives", pizzaOrderId);
+		)
+			.getId();
+		Pizza pizza = new Pizza(
+			id,
+			"Hawaiian",
+			"Deep Dish",
+			"Regular",
+			"Please add extra olives",
+			pizzaOrderId
+		);
 
 		when(pizzaService.save(any(Pizza.class))).thenReturn(pizza);
 
@@ -118,13 +156,16 @@ public class PizzaControllerTests {
 		result
 			.andExpect(status().isCreated())
 			.andExpect(jsonPath("$.id").value(id))
-			.andExpect(jsonPath("$.note").value("Please add extra olives"));
+			.andExpect(jsonPath("$.topping").value(pizza.getTopping()))
+			.andExpect(jsonPath("$.base").value(pizza.getBase()))
+			.andExpect(jsonPath("$.size").value(pizza.getSize()))
+			.andExpect(jsonPath("$.note").value(pizza.getNote()));
 	}
 
 	/**
 	 * Assemble 2 pizzas, return the first one through a mock request, update
-	 * the second using another mock request, then check if the id and note
-	 * matches.
+	 * the second using another mock request, then check if the id, topping, base, size
+	 * and note matches.
 	 * @throws Exception if the pizza cannot be updated
 	 */
 	@Test
@@ -133,9 +174,24 @@ public class PizzaControllerTests {
 		long pizzaOrderId = new PizzaOrder(
 			"John Doe",
 			"1 example lane, testown, presetville 1234"
-		).getId();
-		Pizza pizza = new Pizza(id, "Please add extra olives", pizzaOrderId);
-		Pizza newPizza = new Pizza(id, "Please add extra anchovies", pizzaOrderId);
+		)
+			.getId();
+		Pizza pizza = new Pizza(
+			id,
+			"Hawaiian",
+			"Deep Dish",
+			"Regular",
+			"Please add extra olives",
+			pizzaOrderId
+		);
+		Pizza newPizza = new Pizza(
+			id,
+			"Pepperoni",
+			"Thin Crust",
+			"Large",
+			"Please add extra anchovies",
+			pizzaOrderId
+		);
 
 		when(pizzaService.findById(id)).thenReturn(Optional.of(pizza));
 		when(pizzaService.update(any(Pizza.class))).thenReturn(newPizza);
@@ -151,6 +207,9 @@ public class PizzaControllerTests {
 
 		result
 			.andExpect(status().isOk())
-			.andExpect(jsonPath("$.note").value("Please add extra anchovies"));
+			.andExpect(jsonPath("$.topping").value(newPizza.getTopping()))
+			.andExpect(jsonPath("$.base").value(newPizza.getBase()))
+			.andExpect(jsonPath("$.size").value(newPizza.getSize()))
+			.andExpect(jsonPath("$.note").value(newPizza.getNote()));
 	}
 }
