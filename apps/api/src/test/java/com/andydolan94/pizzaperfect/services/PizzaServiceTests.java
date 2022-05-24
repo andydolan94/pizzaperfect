@@ -169,4 +169,29 @@ public class PizzaServiceTests {
 		assertEquals(newPizzaSample.getSize(), result.getSize());
 		assertEquals(newPizzaSample.getNote(), result.getNote());
 	}
+
+	/**
+	 * Creates a pizza, saves it, deletes it, 
+	 * then checks to see if it has been deleted 
+	 * @throws ResourceNotFoundException if the pizza cannot be found
+	 */
+	@Test
+	void shouldDeleteAPizza() throws ResourceNotFoundException {
+		// Arrange
+		Pizza pizzaSample = new Pizza(
+			"Hawaiian",
+			"Deep Dish",
+			"Regular",
+			"Please add extra olives",
+			pizzaOrderId
+		);
+		Long pizzaSampleId = pizzaRepository.save(pizzaSample).getId();
+		PizzaService pizzaService = new PizzaService(pizzaRepository);
+
+		// Act
+		pizzaService.deleteById(pizzaSampleId);
+
+		// Assert
+		assertEquals(0.0, pizzaRepository.count());
+	}
 }

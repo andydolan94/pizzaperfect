@@ -7,7 +7,6 @@ import com.andydolan94.pizzaperfect.exceptions.ResourceNotFoundException;
 import com.andydolan94.pizzaperfect.repositories.PizzaRepository;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -106,5 +105,19 @@ public class PizzaService {
 			ex.addErrorMessage("Pizza is null or empty");
 			throw ex;
 		}
+	}
+
+	/**
+	 * Deletes a pizza by its id.
+	 * @param id the id of the pizza
+	 * @throws ResourceNotFoundException if the pizza cannot be found
+	 */
+	public void deleteById(long id) throws ResourceNotFoundException {
+		if (!existsById(id)) {
+			throw new ResourceNotFoundException(
+				"Cannot find pizza with id: %d".formatted(id)
+			);
+		}
+		pizzaRepository.deleteById(id);
 	}
 }
