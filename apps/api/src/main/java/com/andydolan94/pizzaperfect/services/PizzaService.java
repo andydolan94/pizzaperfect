@@ -49,9 +49,7 @@ public class PizzaService {
 	public Optional<Pizza> findById(long id) throws ResourceNotFoundException {
 		if (!existsById(id)) {
 			throw new ResourceNotFoundException(
-				"Cannot find pizza with id: %d".formatted(
-						id
-					)
+				"Cannot find pizza with id: %d".formatted(id)
 			);
 		} else {
 			return pizzaRepository.findById(id);
@@ -65,17 +63,14 @@ public class PizzaService {
 	 * @throws BadResourceException if the pizza given is malformed
 	 * @throws ResourceAlreadyExistsException if the pizza given already exists
 	 * 										  with the supplied id
+	 * @throws ResourceNotFoundException
 	 */
 	public Pizza save(Pizza pizza)
 		throws BadResourceException, ResourceAlreadyExistsException {
-		if (
-			StringUtils.hasText(pizza.getNote())
-		) {
+		if (StringUtils.hasText(pizza.getNote())) {
 			if (existsById(pizza.getId())) {
 				throw new ResourceAlreadyExistsException(
-					"Pizza with id: %d already exists".formatted(
-							pizza.getId()
-						)
+					"Pizza with id: %d already exists".formatted(pizza.getId())
 				);
 			}
 			return pizzaRepository.save(pizza);
@@ -97,14 +92,10 @@ public class PizzaService {
 	 */
 	public Pizza update(Pizza pizza)
 		throws BadResourceException, ResourceNotFoundException {
-		if (
-			StringUtils.hasText(pizza.getNote())
-		) {
+		if (StringUtils.hasText(pizza.getNote())) {
 			if (!existsById(pizza.getId())) {
 				throw new ResourceNotFoundException(
-					"Cannot find pizza with id: %d".formatted(
-							pizza.getId()
-						)
+					"Cannot find pizza with id: %d".formatted(pizza.getId())
 				);
 			}
 			return pizzaRepository.save(pizza);
