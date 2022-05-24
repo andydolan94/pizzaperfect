@@ -30,7 +30,9 @@ public class PizzaServiceTests {
 	void setUp() {
 		PizzaOrder pizzaOrder = new PizzaOrder(
 			"John Doe",
-			"1 example lane, testown, presetville 1234"
+			"1 example lane, testown, presetville 1234",
+			true,
+			false
 		);
 		// Need to save a mock order for the pizzas to belong to
 		pizzaOrderId = pizzaOrderRepository.save(pizzaOrder).getId();

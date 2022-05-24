@@ -32,7 +32,9 @@ public class PizzaOrderServiceTests {
 		// Arrange
 		PizzaOrder pizzaOrderSample = new PizzaOrder(
 			"John Doe",
-			"1 example lane, testown, presetville 1234"
+			"1 example lane, testown, presetville 1234",
+			true,
+			false
 		);
 		pizzaOrderRepository.save(pizzaOrderSample);
 		PizzaOrderService pizzaOrderService = new PizzaOrderService(
@@ -65,7 +67,9 @@ public class PizzaOrderServiceTests {
 		// Arrange
 		PizzaOrder pizzaOrderSample = new PizzaOrder(
 			"John Doe",
-			"1 example lane, testown, presetville 1234"
+			"1 example lane, testown, presetville 1234",
+			true,
+			false
 		);
 		long id = pizzaOrderRepository.save(pizzaOrderSample).getId();
 		PizzaOrderService pizzaOrderService = new PizzaOrderService(
@@ -102,7 +106,9 @@ public class PizzaOrderServiceTests {
 		);
 		PizzaOrder pizzaOrderSample = new PizzaOrder(
 			"John Doe",
-			"1 example lane, testown, presetville 1234"
+			"1 example lane, testown, presetville 1234",
+			true,
+			false
 		);
 
 		// Act
@@ -127,7 +133,9 @@ public class PizzaOrderServiceTests {
 		// Arrange
 		PizzaOrder pizzaOrderSample = new PizzaOrder(
 			"John Doe",
-			"1 example lane, testown, presetville 1234"
+			"1 example lane, testown, presetville 1234",
+			true,
+			false
 		);
 		Long pizzaOrderSampleId = pizzaOrderRepository
 			.save(pizzaOrderSample)
@@ -135,7 +143,9 @@ public class PizzaOrderServiceTests {
 		PizzaOrder newPizzaOrderSample = new PizzaOrder(
 			pizzaOrderSampleId,
 			"Random Citizen",
-			"2 interesting drive, upward, backward 2468"
+			"2 interesting drive, upward, backward 2468",
+			true,
+			true
 		);
 		PizzaOrderService pizzaOrderService = new PizzaOrderService(
 			pizzaOrderRepository

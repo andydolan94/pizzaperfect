@@ -46,7 +46,9 @@ public class PizzaControllerTests {
 	void shouldGetAllThePizzas() throws Exception {
 		long pizzaOrderId = new PizzaOrder(
 			"John Doe",
-			"1 example lane, testown, presetville 1234"
+			"1 example lane, testown, presetville 1234",
+			true,
+			false
 		)
 			.getId();
 		List<Pizza> pizzaList = new ArrayList<>();
@@ -94,7 +96,9 @@ public class PizzaControllerTests {
 
 		long pizzaOrderId = new PizzaOrder(
 			"John Doe",
-			"1 example lane, testown, presetville 1234"
+			"1 example lane, testown, presetville 1234",
+			true,
+			false
 		)
 			.getId();
 		Pizza pizza = new Pizza(
@@ -130,7 +134,9 @@ public class PizzaControllerTests {
 		long id = 1L;
 		long pizzaOrderId = new PizzaOrder(
 			"John Doe",
-			"1 example lane, testown, presetville 1234"
+			"1 example lane, testown, presetville 1234",
+			true,
+			false
 		)
 			.getId();
 		Pizza pizza = new Pizza(
@@ -173,7 +179,9 @@ public class PizzaControllerTests {
 		long id = 1L;
 		long pizzaOrderId = new PizzaOrder(
 			"John Doe",
-			"1 example lane, testown, presetville 1234"
+			"1 example lane, testown, presetville 1234",
+			true,
+			false
 		)
 			.getId();
 		Pizza pizza = new Pizza(
