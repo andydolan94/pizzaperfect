@@ -7,6 +7,7 @@ import com.andydolan94.pizzaperfect.exceptions.ResourceNotFoundException;
 import com.andydolan94.pizzaperfect.repositories.PizzaRepository;
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -63,7 +64,6 @@ public class PizzaService {
 	 * @throws BadResourceException if the pizza given is malformed
 	 * @throws ResourceAlreadyExistsException if the pizza given already exists
 	 * 										  with the supplied id
-	 * @throws ResourceNotFoundException
 	 */
 	public Pizza save(Pizza pizza)
 		throws BadResourceException, ResourceAlreadyExistsException {
