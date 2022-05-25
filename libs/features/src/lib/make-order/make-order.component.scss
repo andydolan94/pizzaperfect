@@ -1,0 +1,66 @@
+:host {
+	display: flex;
+	height: 100%;
+	width: 100%;
+
+	.mat-drawer-container {
+		width: 100%;
+		display: flex;
+	}
+
+	.mat-drawer-content {
+		width: 100%;
+		display: flex;
+	}
+
+	.mat-drawer {
+		width: 300px;
+	}
+}
+
+main {
+	width: 100%;
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 0 20px;
+	box-sizing: border-box;
+
+	.content-section {
+		margin-top: 40px;
+
+		.go-back-button {
+			margin-bottom: 24px;
+		}
+	}
+
+	.grid-layout {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 24px;
+	}
+
+	.topping, .base, .size {
+		cursor: pointer;
+		transition: background-color 0.3s ease;
+	}
+
+	.topping.active, .base.active, .size.active {
+		color: #fff;
+		background-color: #3f51b5;
+	}
+	
+	.pizza-section {
+		margin-top: 20px;
+	}
+
+	.pizza-submit-section {
+		display: flex;
+		flex-flow: column nowrap;
+		align-items: flex-start;
+
+		.text-area {
+			margin-bottom: 20px;
+			width: 300px;
+		}
+	}
+}

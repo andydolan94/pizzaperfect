@@ -7,5 +7,5 @@ import { PizzaOrderService } from '@pizzaperfect/core';
 	styleUrls: ['./pizza-orders.component.scss'],
 })
 export class PizzaOrdersComponent {
-	constructor(private pizzaOrderService: PizzaOrderService) {}
+	constructor() {}
 }

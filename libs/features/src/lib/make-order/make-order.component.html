@@ -1,0 +1,109 @@
+<p *ngIf="!pizzaOrder">Loading your order...</p>
+
+<mat-drawer-container class="example-container">
+	<mat-drawer position="end" mode="side" opened>Drawer content</mat-drawer>
+	<mat-drawer-content>
+		<main *ngIf="pizzaOrder">
+			<section class="content-section">
+				<button mat-stroked-button routerLink="" class="go-back-button">
+					Go back
+				</button>
+				<h1>
+					Kia Ora {{ pizzaOrder.customerName }}, lets make some
+					pizzas! 🍕
+				</h1>
+				<p>Here are some of the available pizzas</p>
+			</section>
+
+			<section class="pizza-section pizza-topping-section">
+				<h2>Select a topping</h2>
+				<div class="grid-layout">
+					<mat-card
+						class="topping"
+						(click)="onSelectTopping('Hawaiian')"
+						[class.active]="pizzaTopping === 'Hawaiian'"
+						>🍍 Hawaiian</mat-card
+					>
+					<mat-card
+						class="topping"
+						(click)="onSelectTopping('Meat Lovers')"
+						[class.active]="pizzaTopping === 'Meat Lovers'"
+						>🍖 Meat Lovers</mat-card
+					>
+					<mat-card
+						class="topping"
+						(click)="onSelectTopping('Supreme')"
+						[class.active]="pizzaTopping === 'Supreme'"
+						>🫑 Supreme</mat-card
+					>
+					<mat-card
+						class="topping"
+						(click)="onSelectTopping('Vegetarian')"
+						[class.active]="pizzaTopping === 'Vegetarian'"
+						>🥗 Vegetarian</mat-card
+					>
+				</div>
+			</section>
+
+			<section class="pizza-section pizza-base-section" *ngIf="pizzaTopping">
+				<h2>Select a base</h2>
+				<div class="grid-layout">
+					<mat-card
+						class="base"
+						(click)="onSelectBase('Deep Dish')"
+						[class.active]="pizzaBase === 'Deep Dish'"
+						>🍕 Deep Dish</mat-card
+					>
+					<mat-card
+						class="base"
+						(click)="onSelectBase('Thin Crust')"
+						[class.active]="pizzaBase === 'Thin Crust'"
+						>🍕 Thin Crust</mat-card
+					>
+					<mat-card
+						class="base"
+						(click)="onSelectBase('Stuffed Crust')"
+						[class.active]="pizzaBase === 'Stuffed Crust'"
+						>🍕 Stuffed Crust</mat-card
+					>
+					<mat-card
+						class="base"
+						(click)="onSelectBase('Sourdough')"
+						[class.active]="pizzaBase === 'Sourdough'"
+						>🍕 Sourdough</mat-card
+					>
+				</div>
+			</section>
+
+			<section class="pizza-section pizza-size-section" *ngIf="pizzaBase">
+				<h2>Select a size</h2>
+				<div class="grid-layout">
+					<mat-card
+						class="size"
+						(click)="onSelectSize('Snack')"
+						[class.active]="pizzaSize === 'Snack'"
+						>🍕 Snack</mat-card
+					>
+					<mat-card
+						class="size"
+						(click)="onSelectSize('Medium')"
+						[class.active]="pizzaSize === 'Medium'"
+						>🍕🍕 Medium</mat-card
+					>
+					<mat-card
+						class="size"
+						(click)="onSelectSize('Large')"
+						[class.active]="pizzaSize === 'Large'"
+						>🍕🍕🍕 Large</mat-card
+					>
+				</div>
+			</section>
+
+			<section class="pizza-section pizza-submit-section" *ngIf="pizzaTopping && pizzaBase && pizzaSize">
+				<h2>Leave a note</h2>
+				<textarea class="text-area" [(ngModel)]="pizzaNote"></textarea>
+				<button color="primary" mat-raised-button (click)="onAddPizza()">{{ pizzaId ? 'Update Pizza' : 'Add to Order' }}</button>
+			</section> 
+		</main>
+	</mat-drawer-content>
+</mat-drawer-container>
