@@ -1,6 +1,10 @@
+import { Pizza } from "./pizza";
+
 export interface PizzaOrder {
-	id: string;
+	id: number;
 	customerName: string;
 	deliveryAddress: string;
-	
+	submitted: boolean;
+	delivered: boolean;
+	pizzas: Pizza[]
 }
