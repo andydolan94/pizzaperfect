@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PizzaOrderService } from '@pizzaperfect/core';
 import { PizzaOrder } from '@pizzaperfect/data';
@@ -9,7 +10,12 @@ import { PizzaOrder } from '@pizzaperfect/data';
 	styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-	constructor(private router: Router) {}
+	pizzaOrderForm = this.fb.group({
+		customerName: ['', Validators.required],
+		deliveryAddress: ['', Validators.required],
+	});
+
+	constructor(private router: Router, private fb: FormBuilder) {}
 
 	public beginOrder() {
 
@@ -23,5 +29,13 @@ export class HomeComponent {
 		// 		pizzaOrder.id,
 		// 	]);
 		// })
+	}
+
+	onSubmit() {
+		this.pizzaOrderForm.disable();
+	}
+
+	get customerName() {
+		return this.pizzaOrderForm.get('customerName') as FormArray;
 	}
 }

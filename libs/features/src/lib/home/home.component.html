@@ -1,3 +1,48 @@
-<h1>Welcome to pizza perfect! 🍕</h1>
-<p>We serve the most delicious pizzas</p>
-<button mat-raised-button color="primary" (click)="beginOrder()">Begin order</button>
+<main>
+	<section class="content-section">
+		<h1>Welcome to pizza perfect! 🍕</h1>
+		<p>
+			We serve the most delicious pizzas. Begin by entering your name and
+			address below
+		</p>
+	</section>
+	<section class="form-section">
+		<form [formGroup]="pizzaOrderForm" (ngSubmit)="onSubmit()">
+			<mat-form-field>
+				<mat-label>Name</mat-label>
+				<input
+					matNativeControl
+					formControlName="customerName"
+					type="text"
+					required
+					maxlength="64"
+				/>
+				<mat-error *ngIf="customerName.hasError('required')">
+					Name is <strong>required</strong>
+				</mat-error>
+				<mat-error *ngIf="customerName.hasError('maxlength')">
+					Name exceeds the limit of <strong>64 characters</strong>
+				</mat-error>
+			</mat-form-field>
+			<mat-form-field>
+				<mat-label>Delivery Address</mat-label>
+				<input
+					matNativeControl
+					formControlName="deliveryAddress"
+					type="text"
+					required
+					maxlength="64"
+				/>
+			</mat-form-field>
+			<button
+				mat-raised-button
+				color="primary"
+				type="submit"
+				[disabled]="!pizzaOrderForm.valid"
+				(click)="beginOrder()"
+			>
+				Begin order
+			</button>
+		</form>
+	</section>
+</main>
