@@ -17,9 +17,10 @@ export class HomeComponent {
 
 	constructor(private router: Router, private fb: FormBuilder) {}
 
-	public beginOrder() {
 
-		// disable the button
+		
+	onSubmit() {
+		this.pizzaOrderForm.disable();
 
 		// this.pizzaOrderService.create().subscribe((pizzaOrder: PizzaOrder) => {
 		// 	// Performs creation of an order and then passes
@@ -29,10 +30,6 @@ export class HomeComponent {
 		// 		pizzaOrder.id,
 		// 	]);
 		// })
-	}
-
-	onSubmit() {
-		this.pizzaOrderForm.disable();
 	}
 
 	get customerName() {
