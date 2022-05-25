@@ -3,6 +3,7 @@ main {
 	max-width: 900px;
 	margin: 0 auto;
 	padding: 0 20px;
+	box-sizing: border-box;
 
 	.content-section {
 		margin-top: 40px;
@@ -25,5 +26,9 @@ main {
 				margin-top: 24px;
 			}
 		}
+	}
+
+	.alternate-links {
+		margin-top: 64px;
 	}
 }

@@ -35,4 +35,8 @@ export class HomeComponent {
 	get customerName() {
 		return this.pizzaOrderForm.get('customerName') as FormArray;
 	}
+
+	get deliveryAddress() {
+		return this.pizzaOrderForm.get('deliveryAddress') as FormArray;
+	}
 }

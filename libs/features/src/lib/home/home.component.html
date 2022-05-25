@@ -33,6 +33,12 @@
 					required
 					maxlength="64"
 				/>
+				<mat-error *ngIf="deliveryAddress.hasError('required')">
+					Address is <strong>required</strong>
+				</mat-error>
+				<mat-error *ngIf="deliveryAddress.hasError('maxlength')">
+					Address exceeds the limit of <strong>64 characters</strong>
+				</mat-error>
 			</mat-form-field>
 			<button
 				mat-raised-button
@@ -43,5 +49,8 @@
 				Begin order
 			</button>
 		</form>
+	</section>
+	<section class="alternate-links">
+		<a routerLink="/pizza-orders">...alternatively, click here if you're a delivery driver</a>
 	</section>
 </main>
