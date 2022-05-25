@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from '@pizzaperfect/features';
+import { HomeComponent, PizzaOrdersComponent } from '@pizzaperfect/features';
 
 const routes: Routes = [
 	{
 		path: '',
 		component: HomeComponent
 	},
+	{
+		path: 'pizza-orders',
+		component: PizzaOrdersComponent
+	}
 ];
 
 @NgModule({
