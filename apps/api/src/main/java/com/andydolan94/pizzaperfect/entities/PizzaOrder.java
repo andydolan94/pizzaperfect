@@ -1,18 +1,36 @@
 package com.andydolan94.pizzaperfect.entities;
 
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "pizza_order")
+@SequenceGenerator(
+	name = "PIZZA_ORDER_SEQUENCE",
+	sequenceName = "pizza_order_sequence"
+)
 public class PizzaOrder {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(
+		strategy = GenerationType.SEQUENCE,
+		generator = "PIZZA_ORDER_SEQUENCE"
+	)
 	private long id;
 
 	private String customerName;
 	private String deliveryAddress;
+	private boolean submitted;
+	private boolean delivered;
+
+	@OneToMany(mappedBy = "pizzaOrder")
+	private List<Pizza> pizzas;
 
 	/**
 	 * Class constructor
@@ -20,14 +38,23 @@ public class PizzaOrder {
 	public PizzaOrder() {}
 
 	/**
-	 * Class constructor specifying a customer name, and a delivery address 
+	 * Class constructor specifying a customer name, and a delivery address
 	 * for the order
 	 * @param customerName the customer name
-	 * @param deliveryAddress the delivery address
+	 * @param deliveryAddress the delivery address of the customer
+	 * @param submitted whether the customer is done with the order and has submitted it
+	 * @param delivered whether the delivery driver has delivered the order
 	 */
-	public PizzaOrder(String customerName, String deliveryAddress) {
+	public PizzaOrder(
+		String customerName,
+		String deliveryAddress,
+		boolean submitted,
+		boolean delivered
+	) {
 		this.customerName = customerName;
 		this.deliveryAddress = deliveryAddress;
+		this.submitted = submitted;
+		this.delivered = delivered;
 	}
 
 	/**
@@ -35,12 +62,22 @@ public class PizzaOrder {
 	 * delivery address for the order
 	 * @param id the unique id
 	 * @param customerName the customer name
-	 * @param deliveryAddress the delivery address
+	 * @param deliveryAddress the delivery address of the customer
+	 * @param submitted whether the customer is done with the order and has submitted it
+	 * @param delivered whether the delivery driver has delivered the order
 	 */
-	public PizzaOrder(Long id, String customerName, String deliveryAddress) {
+	public PizzaOrder(
+		Long id,
+		String customerName,
+		String deliveryAddress,
+		boolean submitted,
+		boolean delivered
+	) {
 		this.id = id;
 		this.customerName = customerName;
 		this.deliveryAddress = deliveryAddress;
+		this.submitted = submitted;
+		this.delivered = delivered;
 	}
 
 	/**
@@ -89,5 +126,45 @@ public class PizzaOrder {
 	 */
 	public void setDeliverAddress(String deliveryAddress) {
 		this.deliveryAddress = deliveryAddress;
+	}
+
+	/**
+	 * Gets the submitted status of the order
+	 * @return the submitted status
+	 */
+	public boolean getSubmitted() {
+		return submitted;
+	}
+
+	/**
+	 * Sets the submitted status of the order
+	 * @param submitted the submitted status to set
+	 */
+	public void setSubmitted(boolean submitted) {
+		this.submitted = submitted;
+	}
+
+	/**
+	 * Gets the delivered status of the order
+	 * @return the delivered status
+	 */
+	public boolean getDelivered() {
+		return delivered;
+	}
+
+	/**
+	 * Sets the delivered status of the order
+	 * @param delivered the delivered status to set
+	 */
+	public void setDelivered(boolean delivered) {
+		this.delivered = delivered;
+	}
+
+	/**
+	 * Gets the list of pizzas on an order
+	 * @return the list of pizzas
+	 */
+	public List<Pizza> getPizzas() {
+		return this.pizzas;
 	}
 }
