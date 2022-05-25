@@ -4,6 +4,7 @@
 	"projects": {
 		"core": "libs/core",
 		"data": "libs/data",
+		"features": "libs/features",
 		"pizzaperfect": "apps/pizzaperfect",
 		"pizzaperfect-e2e": "apps/pizzaperfect-e2e"
 	}

@@ -16,6 +16,7 @@
 		"baseUrl": ".",
 		"paths": {
 			"@pizzaperfect/core": ["libs/core/src/index.ts"],
+			"@pizzaperfect/features": ["libs/features/src/index.ts"]
 		}
 	},
 	"exclude": ["node_modules", "tmp"]
