@@ -8,3 +8,17 @@ export interface PizzaOrder {
 	delivered: boolean;
 	pizzas: Pizza[]
 }
+
+export interface CreatePizzaOrderInput {
+	customerName: string;
+	deliveryAddress: string;
+	submitted: boolean;
+	delivered: boolean;
+}
+
+export interface UpdatePizzaOrderInput {
+	customerName: string;
+	deliveryAddress: string;
+	submitted: boolean;
+	delivered: boolean;
+}
