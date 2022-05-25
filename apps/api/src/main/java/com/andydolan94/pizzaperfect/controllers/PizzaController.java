@@ -88,4 +88,14 @@ public class PizzaController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
+
+	@DeleteMapping("/pizzas/{id}")
+	public ResponseEntity<Void> delete(@PathVariable Long id) {
+		try {
+			pizzaService.deleteById(id);
+			return ResponseEntity.noContent().build();
+		} catch (ResourceNotFoundException ex) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
 }

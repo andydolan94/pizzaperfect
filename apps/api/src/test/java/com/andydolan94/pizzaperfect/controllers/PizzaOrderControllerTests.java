@@ -48,14 +48,18 @@ public class PizzaOrderControllerTests {
 			new PizzaOrder(
 				1L,
 				"John Doe",
-				"1 example lane, testown, presetville 1234"
+				"1 example lane, testown, presetville 1234",
+				true,
+				false
 			)
 		);
 		pizzaOrderList.add(
 			new PizzaOrder(
 				2L,
 				"Random Citizen",
-				"2 interesting drive, upward, backward 2468"
+				"2 interesting drive, upward, backward 2468",
+				true,
+				true
 			)
 		);
 
@@ -73,7 +77,8 @@ public class PizzaOrderControllerTests {
 
 	/**
 	 * Assembles an order, returns it through a mock request, then checks if
-	 * the response is ok (200), and if the id and note matches.
+	 * the response is ok (200), and if the id, customerName, deliveryAddress,
+	 * submitted, delivered, and note matches.
 	 * @throws Exception if the order cannot be retrieved
 	 */
 	@Test
@@ -83,7 +88,9 @@ public class PizzaOrderControllerTests {
 		PizzaOrder pizzaOrder = new PizzaOrder(
 			id,
 			"John Doe",
-			"1 example lane, testown, presetville 1234"
+			"1 example lane, testown, presetville 1234",
+			true,
+			false
 		);
 
 		when(pizzaOrderService.findById(id))
@@ -100,13 +107,16 @@ public class PizzaOrderControllerTests {
 				jsonPath("$.deliveryAddress")
 					.value(pizzaOrder.getDeliveryAddress())
 			)
+			.andExpect(jsonPath("$.submitted").value(pizzaOrder.getSubmitted()))
+			.andExpect(jsonPath("$.delivered").value(pizzaOrder.getDelivered()))
 			.andDo(print());
 	}
 
 	/**
 	 * Assembles an order, creates it through a mock request, checks if the
 	 * response shows it has been created (201), and if the id, the customer
-	 * name and the delivery address matches.
+	 * name, the delivery address, the submitted status and delivered status
+	 * matches.
 	 * @throws Exception if the order cannot be created
 	 */
 	@Test
@@ -115,7 +125,9 @@ public class PizzaOrderControllerTests {
 		PizzaOrder pizzaOrder = new PizzaOrder(
 			id,
 			"John Doe",
-			"1 example lane, testown, presetville 1234"
+			"1 example lane, testown, presetville 1234",
+			true,
+			false
 		);
 
 		when(pizzaOrderService.save(any(PizzaOrder.class)))
@@ -133,10 +145,16 @@ public class PizzaOrderControllerTests {
 		result
 			.andExpect(status().isCreated())
 			.andExpect(jsonPath("$.id").value(id))
-			.andExpect(jsonPath("$.customerName").value("John Doe"))
+			.andExpect(
+				jsonPath("$.customerName").value(pizzaOrder.getCustomerName())
+			)
 			.andExpect(
 				jsonPath("$.deliveryAddress")
-					.value("1 example lane, testown, presetville 1234")
+					.value(pizzaOrder.getDeliveryAddress())
+			)
+			.andExpect(jsonPath("$.submitted").value(pizzaOrder.getSubmitted()))
+			.andExpect(
+				jsonPath("$.delivered").value(pizzaOrder.getDelivered())
 			);
 	}
 
@@ -152,12 +170,16 @@ public class PizzaOrderControllerTests {
 		PizzaOrder pizzaOrder = new PizzaOrder(
 			id,
 			"John Doe",
-			"1 example lane, testown, presetville 1234"
+			"1 example lane, testown, presetville 1234",
+			true,
+			false
 		);
 		PizzaOrder newPizzaOrder = new PizzaOrder(
 			id,
 			"Random Citizen",
-			"2 interesting drive, upward, backward 2468"
+			"2 interesting drive, upward, backward 2468",
+			true,
+			true
 		);
 
 		when(pizzaOrderService.findById(id))

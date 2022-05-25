@@ -49,9 +49,7 @@ public class PizzaService {
 	public Optional<Pizza> findById(long id) throws ResourceNotFoundException {
 		if (!existsById(id)) {
 			throw new ResourceNotFoundException(
-				"Cannot find pizza with id: %d".formatted(
-						id
-					)
+				"Cannot find pizza with id: %d".formatted(id)
 			);
 		} else {
 			return pizzaRepository.findById(id);
@@ -68,14 +66,10 @@ public class PizzaService {
 	 */
 	public Pizza save(Pizza pizza)
 		throws BadResourceException, ResourceAlreadyExistsException {
-		if (
-			StringUtils.hasText(pizza.getNote())
-		) {
+		if (StringUtils.hasText(pizza.getNote())) {
 			if (existsById(pizza.getId())) {
 				throw new ResourceAlreadyExistsException(
-					"Pizza with id: %d already exists".formatted(
-							pizza.getId()
-						)
+					"Pizza with id: %d already exists".formatted(pizza.getId())
 				);
 			}
 			return pizzaRepository.save(pizza);
@@ -97,14 +91,10 @@ public class PizzaService {
 	 */
 	public Pizza update(Pizza pizza)
 		throws BadResourceException, ResourceNotFoundException {
-		if (
-			StringUtils.hasText(pizza.getNote())
-		) {
+		if (StringUtils.hasText(pizza.getNote())) {
 			if (!existsById(pizza.getId())) {
 				throw new ResourceNotFoundException(
-					"Cannot find pizza with id: %d".formatted(
-							pizza.getId()
-						)
+					"Cannot find pizza with id: %d".formatted(pizza.getId())
 				);
 			}
 			return pizzaRepository.save(pizza);
@@ -115,5 +105,19 @@ public class PizzaService {
 			ex.addErrorMessage("Pizza is null or empty");
 			throw ex;
 		}
+	}
+
+	/**
+	 * Deletes a pizza by its id.
+	 * @param id the id of the pizza
+	 * @throws ResourceNotFoundException if the pizza cannot be found
+	 */
+	public void deleteById(long id) throws ResourceNotFoundException {
+		if (!existsById(id)) {
+			throw new ResourceNotFoundException(
+				"Cannot find pizza with id: %d".formatted(id)
+			);
+		}
+		pizzaRepository.deleteById(id);
 	}
 }
