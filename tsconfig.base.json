@@ -15,7 +15,7 @@
 		"skipDefaultLibCheck": true,
 		"baseUrl": ".",
 		"paths": {
-			"@pizzaperfect/data": ["libs/data/src/index.ts"]
+			"@pizzaperfect/core": ["libs/core/src/index.ts"],
 		}
 	},
 	"exclude": ["node_modules", "tmp"]
