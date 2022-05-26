@@ -3,8 +3,14 @@ package com.andydolan94.pizzaperfect.exceptions;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Exception handler for malformed data
+ */
 public class BadResourceException extends Exception {
 
+	/**
+	 * List for holding the error messages
+	 */
 	private List<String> errorMessages = new ArrayList<>();
 
 	/**

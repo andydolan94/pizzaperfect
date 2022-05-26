@@ -10,6 +10,9 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+/**
+ * Service for Pizza Orders
+ */
 @Service
 public class PizzaOrderService {
 
@@ -26,14 +29,14 @@ public class PizzaOrderService {
 
 	/**
 	 * Class constructor defining its associated repository
-	 * @param pizzaRepository the repository
+	 * @param pizzaOrderRepository the repository
 	 */
 	public PizzaOrderService(PizzaOrderRepository pizzaOrderRepository) {
 		this.pizzaOrderRepository = pizzaOrderRepository;
 	}
 
 	/**
-	 * Lists all of the orders in the database
+	 * Lists all the orders in the database
 	 * @return the list of orders
 	 */
 	public List<PizzaOrder> findAll() {

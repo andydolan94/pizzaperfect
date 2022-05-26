@@ -1,8 +1,16 @@
-# Pizzaperfect
+# Pizza Perfect
+
+Project requirements
+- Java 18 to run the API
+- NodeJS version >=16 to execute Nx + Angular commands
+
+_(please note: the API of this project has not been properly linked with Nx, however it shares a directory with all the other apps whilst running independently from the monorepo)_
+
+---
 
 This project was generated using [Nx](https://nx.dev).
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+<p><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="200"></p>
 
 🔎 **Smart, Fast and Extensible Build System**
 

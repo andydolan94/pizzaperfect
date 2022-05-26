@@ -1,6 +1,8 @@
 package com.andydolan94.pizzaperfect.entities;
 
 import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,6 +11,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+/**
+ * Entity for pizza orders
+ * This contains all the information about an order and all the pizzas it contains
+ */
 @Entity
 @Table(name = "pizza_order")
 @SequenceGenerator(
@@ -24,8 +30,12 @@ public class PizzaOrder {
 	)
 	private long id;
 
+	@Column(nullable = false)
 	private String customerName;
+
+	@Column(nullable = false)
 	private String deliveryAddress;
+
 	private boolean submitted;
 	private boolean delivered;
 

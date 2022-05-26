@@ -1,5 +1,8 @@
 package com.andydolan94.pizzaperfect.exceptions;
 
+/**
+ * Exception handler for resources that cannot be found
+ */
 public class ResourceNotFoundException extends Exception {
 
 	/**

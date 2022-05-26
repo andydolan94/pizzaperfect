@@ -1,5 +1,8 @@
 package com.andydolan94.pizzaperfect.exceptions;
 
+/**
+ * Exception handler for resources that already exist
+ */
 public class ResourceAlreadyExistsException extends Exception {
 
 	/**
