@@ -7,6 +7,9 @@ import com.andydolan94.pizzaperfect.exceptions.ResourceNotFoundException;
 import com.andydolan94.pizzaperfect.services.PizzaService;
 import java.util.List;
 import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +20,8 @@ public class PizzaController {
 	
 	@Autowired
 	private PizzaService pizzaService;
+
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * Gets a list of pizzas
@@ -40,6 +45,7 @@ public class PizzaController {
 				HttpStatus.OK
 			);
 		} catch (ResourceNotFoundException ex) {
+			logger.error(ex.getMessage());
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
@@ -59,8 +65,10 @@ public class PizzaController {
 				HttpStatus.CREATED
 			);
 		} catch (ResourceAlreadyExistsException ex) {
+			logger.error(ex.getMessage());
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		} catch (BadResourceException ex) {
+			logger.error(ex.getMessage());
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
@@ -83,8 +91,10 @@ public class PizzaController {
 				HttpStatus.OK
 			);
 		} catch (ResourceNotFoundException ex) {
+			logger.error(ex.getMessage());
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} catch (BadResourceException ex) {
+			logger.error(ex.getMessage());
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
@@ -95,6 +105,7 @@ public class PizzaController {
 			pizzaService.deleteById(id);
 			return ResponseEntity.noContent().build();
 		} catch (ResourceNotFoundException ex) {
+			logger.error(ex.getMessage());
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}

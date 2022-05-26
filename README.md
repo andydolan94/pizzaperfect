@@ -1,8 +1,14 @@
-# Pizzaperfect
+# Pizza Perfect
+
+This project requires
+- NodeJS and NPM to execute Nx + Angular commands
+- Java 18 to run the API
+
+---
 
 This project was generated using [Nx](https://nx.dev).
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+<p><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="200"></p>
 
 🔎 **Smart, Fast and Extensible Build System**
 
