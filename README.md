@@ -1,8 +1,10 @@
 # Pizza Perfect
 
-This project requires
-- NodeJS and NPM to execute Nx + Angular commands
+Project requirements
 - Java 18 to run the API
+- NodeJS version >=16 to execute Nx + Angular commands
+
+_(please note: the API of this project has not been properly linked with Nx, however it shares a directory with all the other apps whilst running independently from the monorepo)_
 
 ---
 
