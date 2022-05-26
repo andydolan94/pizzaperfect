@@ -22,10 +22,16 @@ public class Pizza {
 	)
 	private long id;
 
-	private String note;
+	@Column(nullable = false)
 	private String topping;
+
+	@Column(nullable = false)
 	private String base;
+
+	@Column(nullable = false)
 	private String size;
+
+	private String note;
 
 	@ManyToOne
 	@JoinColumn(

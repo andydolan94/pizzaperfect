@@ -1,6 +1,8 @@
 package com.andydolan94.pizzaperfect.entities;
 
 import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,8 +26,12 @@ public class PizzaOrder {
 	)
 	private long id;
 
+	@Column(nullable = false)
 	private String customerName;
+
+	@Column(nullable = false)
 	private String deliveryAddress;
+	
 	private boolean submitted;
 	private boolean delivered;
 
