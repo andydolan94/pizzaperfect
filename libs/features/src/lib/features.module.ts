@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MakeOrderComponent } from './make-order/make-order.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatChipsModule } from "@angular/material/chips";
 
 @NgModule({
 	declarations: [
@@ -31,6 +32,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 		MatCardModule,
 		MatSnackBarModule,
 		MatSidenavModule,
+		MatChipsModule,
 		FormsModule,
 		RouterModule,
 	],

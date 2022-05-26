@@ -1,9 +1,8 @@
-<p *ngIf="!pizzaOrder">Loading your order...</p>
+<h1 *ngIf="state === 'loading'">Loading your order...</h1>
 
-<mat-drawer-container class="example-container">
-	<mat-drawer position="end" mode="side" opened>Drawer content</mat-drawer>
+<mat-drawer-container class="example-container" *ngIf="state === 'ready'">
 	<mat-drawer-content>
-		<main *ngIf="pizzaOrder">
+		<main>
 			<section class="content-section">
 				<button mat-stroked-button routerLink="" class="go-back-button">
 					Go back
@@ -45,7 +44,10 @@
 				</div>
 			</section>
 
-			<section class="pizza-section pizza-base-section" *ngIf="pizzaTopping">
+			<section
+				class="pizza-section pizza-base-section"
+				*ngIf="pizzaTopping"
+			>
 				<h2>Select a base</h2>
 				<div class="grid-layout">
 					<mat-card
@@ -99,11 +101,116 @@
 				</div>
 			</section>
 
-			<section class="pizza-section pizza-submit-section" *ngIf="pizzaTopping && pizzaBase && pizzaSize">
+			<section
+				class="pizza-section pizza-submit-section"
+				*ngIf="pizzaTopping && pizzaBase && pizzaSize"
+			>
 				<h2>Leave a note</h2>
 				<textarea class="text-area" [(ngModel)]="pizzaNote"></textarea>
-				<button color="primary" mat-raised-button (click)="onAddPizza()">{{ pizzaId ? 'Update Pizza' : 'Add to Order' }}</button>
-			</section> 
+
+				<div class="order-actions">
+					<button
+						*ngIf="!pizzaId"
+						color="primary"
+						mat-raised-button
+						(click)="onAddPizza()"
+					>
+						Add to Order
+					</button>
+					<button
+						*ngIf="pizzaId"
+						color="primary"
+						mat-raised-button
+						(click)="onUpdatePizza()"
+					>
+						Update Pizza
+					</button>
+					<button mat-raised-button (click)="clearData()">
+						Cancel
+					</button>
+				</div>
+			</section>
 		</main>
 	</mat-drawer-content>
+	<mat-drawer position="end" mode="side" opened>
+		<h2>Here's your order 📝</h2>
+		<mat-card *ngFor="let pizza of pizzaOrder.pizzas" class="pizza">
+			<h2>{{ pizza.topping }}</h2>
+			<mat-chip-list
+				class="pizza-selections"
+				aria-label="Pizza selections"
+			>
+				<mat-chip color="primary" selected>{{ pizza.base }}</mat-chip>
+				<mat-chip color="accent" selected>{{ pizza.size }}</mat-chip>
+			</mat-chip-list>
+			<code>{{ pizza.note }}</code>
+			<mat-card-actions>
+				<button
+					mat-button
+					color="primary"
+					(click)="onModifyPizza(pizza)"
+				>
+					Modify
+				</button>
+				<button
+					mat-button
+					color="warn"
+					(click)="onDeletePizza(pizza.id)"
+				>
+					Delete
+				</button>
+			</mat-card-actions>
+		</mat-card>
+		<button
+			mat-raised-button
+			color="primary"
+			(click)="onSubmitOrder()"
+			[disabled]="pizzaOrder.pizzas.length === 0"
+		>
+			Submit your order
+		</button>
+	</mat-drawer>
 </mat-drawer-container>
+
+<mat-drawer-container
+	class="example-container"
+	*ngIf="state === 'submitted' || state === 'delivered'"
+>
+	<mat-drawer-content>
+		<main>
+			<section class="content-section">
+				<button mat-stroked-button routerLink="" class="go-back-button">
+					Go back
+				</button>
+				<h1 *ngIf="state === 'submitted'">
+					Kia Ora {{ pizzaOrder.customerName }}, your pizzas are on
+					their way to {{ pizzaOrder.deliveryAddress }} 🍕
+				</h1>
+				<h1 *ngIf="state === 'delivered'">
+					Kia Ora {{ pizzaOrder.customerName }}, your pizzas have
+					successfully been delivered to
+					{{ pizzaOrder.deliveryAddress }} 🍕
+				</h1>
+			</section>
+		</main>
+	</mat-drawer-content>
+	<mat-drawer position="end" mode="side" opened>
+		<h2>Here's your order 📝</h2>
+		<mat-card *ngFor="let pizza of pizzaOrder.pizzas" class="pizza">
+			<h2>{{ pizza.topping }}</h2>
+			<mat-chip-list
+				class="pizza-selections"
+				aria-label="Pizza selections"
+			>
+				<mat-chip color="primary" selected>{{ pizza.base }}</mat-chip>
+				<mat-chip color="accent" selected>{{ pizza.size }}</mat-chip>
+			</mat-chip-list>
+			<code>{{ pizza.note }}</code>
+		</mat-card>
+	</mat-drawer>
+</mat-drawer-container>
+
+<h1 *ngIf="state === 'notfound'">Looks like this order doesn't exist</h1>
+<h1 *ngIf="state === 'error'">
+	Oops, something went wrong, please try again later
+</h1>

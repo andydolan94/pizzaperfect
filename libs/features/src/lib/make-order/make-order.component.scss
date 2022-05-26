@@ -15,6 +15,15 @@
 
 	.mat-drawer {
 		width: 300px;
+
+		.pizza {
+			margin-bottom: 20px;
+
+			.pizza-selections {
+				display: block;
+				margin-bottom: 16px;
+			}
+		}
 	}
 }
 
@@ -61,6 +70,13 @@ main {
 		.text-area {
 			margin-bottom: 20px;
 			width: 300px;
+		}
+
+		.order-actions {
+			display: flex;
+			flex-flow: row nowrap;
+			align-items: center;
+			gap: 8px;
 		}
 	}
 }
