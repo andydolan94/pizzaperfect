@@ -13,7 +13,15 @@ import { Pizza, PizzaOrder } from '@pizzaperfect/data';
 export class MakeOrderComponent implements OnInit {
 	pizzaOrder!: PizzaOrder;
 
-	// State of the component
+	/**
+	 * State of the component
+	 * Default state 'loading': don't show anything before the component has rendered
+	 * 'ready': for when the user can make their order
+	 * 'submitted': for when the user has submitted their order
+	 * 'delivered': for when the delivery driver has marked the order off
+	 * 'notfound': the order doesn't exist
+	 * 'error': an uncaught error by the system
+	 */
 	state:
 		| 'loading'
 		| 'ready'
@@ -22,7 +30,12 @@ export class MakeOrderComponent implements OnInit {
 		| 'notfound'
 		| 'error' = 'loading';
 
-	// Pizza properties before they're populated
+	/**
+	 * Pizza properties before they're populated
+	 * Pizza ID is defined when the user is editing a pizza
+	 * topping, base, and size are all defined by user inputs
+	 * the note is either an empty string or populated
+	 */
 	pizzaId: number | undefined;
 	pizzaTopping: string | undefined;
 	pizzaBase: string | undefined;
@@ -37,6 +50,8 @@ export class MakeOrderComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
+
+		// Look at the url parameters
 		const id: string | null = this.route.snapshot.paramMap.get('id');
 		if (id) {
 			this.pizzaOrderService.getPizzaOrder(+id).subscribe({
