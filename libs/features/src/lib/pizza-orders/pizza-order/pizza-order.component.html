@@ -1,0 +1,38 @@
+<mat-card>
+	<mat-card-title>
+		{{ pizzaOrder.customerName }}
+	</mat-card-title>
+	<mat-card-content>
+		<p>{{ pizzaOrder.deliveryAddress }}</p>
+		<mat-card *ngFor="let pizza of pizzaOrder.pizzas" class="pizza">
+			<h2>{{ pizza.topping }}</h2>
+			<mat-chip-list
+				class="pizza-selections"
+				aria-label="Pizza selections"
+			>
+				<mat-chip color="primary" selected>{{ pizza.base }}</mat-chip>
+				<mat-chip color="accent" selected>{{ pizza.size }}</mat-chip>
+			</mat-chip-list>
+			<code>{{ pizza.note }}</code>
+		</mat-card>
+		<p *ngIf="!pizzaOrder.submitted && !pizzaOrder.delivered">
+			Status: still being written... ✏️
+		</p>
+		<p *ngIf="pizzaOrder.submitted && !pizzaOrder.delivered">
+			Status: ready to be delivered 📦
+		</p>
+		<p *ngIf="pizzaOrder.submitted && pizzaOrder.delivered">
+			Status: delivered 🥳
+		</p>
+	</mat-card-content>
+	<mat-card-actions>
+		<button
+			*ngIf="pizzaOrder.submitted && !pizzaOrder.delivered"
+			mat-raised-button
+			color="primary"
+			(click)="onMarkAsDelivered(pizzaOrder)"
+		>
+			Mark as delivered
+		</button>
+	</mat-card-actions>
+</mat-card>

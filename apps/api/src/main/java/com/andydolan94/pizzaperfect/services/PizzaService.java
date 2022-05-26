@@ -66,7 +66,11 @@ public class PizzaService {
 	 */
 	public Pizza save(Pizza pizza)
 		throws BadResourceException, ResourceAlreadyExistsException {
-		if (StringUtils.hasText(pizza.getNote())) {
+		if (
+			StringUtils.hasText(pizza.getTopping()) &&
+			StringUtils.hasText(pizza.getBase()) &&
+			StringUtils.hasText(pizza.getSize())
+		) {
 			if (existsById(pizza.getId())) {
 				throw new ResourceAlreadyExistsException(
 					"Pizza with id: %d already exists".formatted(pizza.getId())
