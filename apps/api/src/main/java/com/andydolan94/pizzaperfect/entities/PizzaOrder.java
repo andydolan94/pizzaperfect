@@ -11,6 +11,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+/**
+ * Entity for pizza orders
+ * This contains all the information about an order and all the pizzas it contains
+ */
 @Entity
 @Table(name = "pizza_order")
 @SequenceGenerator(
@@ -31,7 +35,7 @@ public class PizzaOrder {
 
 	@Column(nullable = false)
 	private String deliveryAddress;
-	
+
 	private boolean submitted;
 	private boolean delivered;
 

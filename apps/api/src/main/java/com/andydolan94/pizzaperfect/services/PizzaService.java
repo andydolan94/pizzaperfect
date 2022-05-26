@@ -10,6 +10,9 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+/**
+ * Service for Pizzas
+ */
 @Service
 public class PizzaService {
 

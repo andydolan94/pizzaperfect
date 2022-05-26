@@ -10,6 +10,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+/**
+ * Entity for Pizzas
+ * This contains the information about a pizza
+ */
 @Entity
 @Table(name = "pizza")
 @SequenceGenerator(name = "PIZZA_SEQUENCE", sequenceName = "pizza_sequence")
@@ -82,11 +86,11 @@ public class Pizza {
 	 * @param pizzaOrderId the order id the pizza belongs to
 	 */
 	public Pizza(
-		Long id, 
+		Long id,
 		String topping,
 		String base,
 		String size,
-		String note, 
+		String note,
 		Long pizzaOrderId
 	) {
 		this.id = id;
@@ -123,7 +127,7 @@ public class Pizza {
 
 	/**
 	 * Sets the topping
-	 * @param note the topping to set
+	 * @param topping the topping to set
 	 */
 	public void setTopping(String topping) {
 		this.topping = topping;
@@ -139,7 +143,7 @@ public class Pizza {
 
 	/**
 	 * Sets the base
-	 * @param note the base to set
+	 * @param base the base to set
 	 */
 	public void setBase(String base) {
 		this.base = base;
@@ -155,7 +159,7 @@ public class Pizza {
 
 	/**
 	 * Sets the size
-	 * @param note the size to set
+	 * @param size the size to set
 	 */
 	public void setSize(String size) {
 		this.size = size;
@@ -187,7 +191,7 @@ public class Pizza {
 
 	/**
 	 * Sets the order for the pizza to belong to
-	 * @param pizzaOrder the pizzaOrder to set
+	 * @param pizzaOrderId the pizzaOrder to set
 	 */
 	public void setPizzaOrderId(long pizzaOrderId) {
 		this.pizzaOrderId = pizzaOrderId;

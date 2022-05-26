@@ -15,9 +15,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controller for Pizzas
+ */
 @RestController
 public class PizzaController {
-	
+
 	@Autowired
 	private PizzaService pizzaService;
 
@@ -99,6 +102,11 @@ public class PizzaController {
 		}
 	}
 
+	/**
+	 * Deletes a pizza from the database
+	 * @param id the id of the pizza
+	 * @return void
+	 */
 	@DeleteMapping("/pizzas/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		try {
